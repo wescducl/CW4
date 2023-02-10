@@ -1,0 +1,51 @@
+using System;
+
+public interface ICar
+{
+    string GetName();
+}
+
+public class SportsCar : ICar
+{
+    public string GetName()
+    {
+        return "Sports Car";
+    }
+}
+
+public class FamilyCar : ICar
+{
+    public string GetName()
+    {
+        return "Family Car";
+    }
+}
+
+public class CarFactory
+{
+    public ICar GetCar(string type)
+    {
+        switch (type)
+        {
+            case "sports":
+                return new SportsCar();
+            case "family":
+                return new FamilyCar();
+            default:
+                throw new ArgumentException("Invalid car type");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        CarFactory factory = new CarFactory();
+        ICar car = factory.GetCar("sports");
+        Console.WriteLine("Created: " + car.GetName());
+
+        car = factory.GetCar("family");
+        Console.WriteLine("Created: " + car.GetName());
+    }
+}
