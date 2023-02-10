@@ -1,0 +1,57 @@
+using System;
+
+public interface ICar
+{
+    string GetName();
+}
+
+public interface ICarFactory
+{
+    ICar CreateCar();
+}
+
+public class SportsCar : ICar
+{
+    public string GetName()
+    {
+        return "Sports Car";
+    }
+}
+
+public class FamilyCar : ICar
+{
+    public string GetName()
+    {
+        return "Family Car";
+    }
+}
+
+public class SportsCarFactory : ICarFactory
+{
+    public ICar CreateCar()
+    {
+        return new SportsCar();
+    }
+}
+
+public class FamilyCarFactory : ICarFactory
+{
+    public ICar CreateCar()
+    {
+        return new FamilyCar();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ICarFactory factory = new SportsCarFactory();
+        ICar car = factory.CreateCar();
+        Console.WriteLine("Created: " + car.GetName());
+
+        factory = new FamilyCarFactory();
+        car = factory.CreateCar();
+        Console.WriteLine("Created: " + car.GetName());
+    }
+}
